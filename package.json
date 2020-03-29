@@ -1,0 +1,19 @@
+{
+  "name": "canvas-pendulum",
+  "version": "1.0.0",
+  "description": "canvas单摆组件",
+  "main": "index.js",
+  "directories": {
+    "example": "example"
+  },
+  "scripts": {
+    "dev": "parcel example/index.html",
+    "build": "parcel build <your entry file>"
+  },
+  "keywords": [
+    "单摆",
+    "canvas"
+  ],
+  "author": "Orange",
+  "license": "ISC"
+}
