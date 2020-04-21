@@ -5,5 +5,6 @@ window.onload = function () {
   new CanvasPendulum({
     el: canvas,
     ballNum: 4,
+    ballStyles: ['https://www.kai666666.top/images/avatar.png','#00ff00','orange','transparent']
   }).start();
 };

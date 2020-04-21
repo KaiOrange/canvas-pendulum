@@ -2,13 +2,13 @@
   "name": "canvas-pendulum",
   "version": "1.0.0",
   "description": "canvas单摆组件",
-  "main": "index.js",
+  "main": "/lib/index.js",
   "directories": {
     "example": "example"
   },
   "scripts": {
     "dev": "parcel example/index.html",
-    "build": "parcel build <your entry file>"
+    "build": "parcel build src/index.js -d lib/"
   },
   "keywords": [
     "单摆",
