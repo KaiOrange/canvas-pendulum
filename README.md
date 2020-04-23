@@ -1,6 +1,6 @@
 # canvas-pendulum
 
-基于`canvas`的单摆组件。demo:[https://kaiorange.github.io/canvas-pendulum](https://kaiorange.github.io/canvas-pendulum)
+基于`canvas`的单摆组件。demo:[https://canvas-pendulum.kai666666.top/](https://canvas-pendulum.kai666666.top/)
 
 ## 安装 ##
 
