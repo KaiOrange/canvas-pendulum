@@ -1,0 +1,10 @@
+logs
+node_modules/
+.npm
+.eslintcache
+.cache
+dist
+exampleDist
+.serverless
+.idea
+.vscode

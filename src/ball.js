@@ -52,6 +52,10 @@ class  Ball {
       height: this.radius * 2
     };
   }
+
+  isPointInBall(x,y){
+    return Math.pow(x - this.x, 2) +  Math.pow(y - this.y, 2) <=  Math.pow(this.radius, 2);
+  }
 }
 
 

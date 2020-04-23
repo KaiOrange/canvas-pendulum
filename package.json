@@ -1,6 +1,6 @@
 {
   "name": "canvas-pendulum",
-  "version": "1.0.0",
+  "version": "0.0.1",
   "description": "canvas单摆组件",
   "main": "/lib/index.js",
   "directories": {
@@ -8,12 +8,15 @@
   },
   "scripts": {
     "dev": "parcel example/index.html",
-    "build": "parcel build src/index.js -d lib/"
+    "build": "parcel build src/index.js -d lib/ && parcel build example/index.html -d exampleDist/"
   },
   "keywords": [
     "单摆",
     "canvas"
   ],
   "author": "Orange",
-  "license": "ISC"
+  "license": "ISC",
+  "devDependencies": {
+    "cssnano": "^4.1.10"
+  }
 }

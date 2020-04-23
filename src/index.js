@@ -1,21 +1,42 @@
-import Ball from './ball'
 import utils from './utils'
+import { EventEmitter } from 'events'
+import Ball from './ball'
 
-class CanvasPendulum {
+class CanvasPendulum extends EventEmitter {
 
   constructor(options = {}){
-    this.canvas = options.el
-    if (!this.canvas) {
+    super()
+    options = options || {};
+    this.el = options.el;
+    if (typeof this.el === 'string') {
+      this.el = document.querySelector(this.el)
+    }
+    if (this.el) {
+      if (this.el.tagName === 'CANVAS') {
+        this.canvas = this.el
+      } else if(this.el.appendChild) {
+        this.canvas = document.createElement('canvas');
+        this.el.appendChild(this.canvas);
+      } else {
+        throw new Error('参数el错误');
+      }
+    } else {
       this.canvas = document.createElement('canvas');
       document.body.appendChild(this.canvas);
     }
-    this.cWidth = options.width || this.canvas.width;
-    this.cHeight =  options.height || this.canvas.height;
+
+    this.cWidth = options.width || this.canvas.width || 300;
+    this.cHeight =  options.height || this.canvas.height || 150;
+    if (this.canvas.width !== this.cWidth) {
+      this.canvas.width = this.cWidth
+    }
+    if (this.canvas.height !== this.cHeight) {
+      this.canvas.height = this.cHeight
+    }
     this.context = this.canvas.getContext('2d');
-    var mouse = utils.captureMouse(this.canvas);
 
     this.T = options.T || 1000;// 周期
-    this.ballNum = options.ballNum || 5;
+    this.ballNum = options.ballNum || 1;
     this.ballWidth = options.ballWidth || 40;
     this.maxAngle = options.maxAngle || 20;// 最大的角度
     this.outLineWidth = Math.min(options.outLineWidth || 1,this.ballWidth);// 边框大小
@@ -24,7 +45,7 @@ class CanvasPendulum {
     this.maxRadian = Math.PI * (this.maxAngle || 10) / 180;
 
     this.startTime = + new Date();
-    this.time = this.getTimer();
+    this.time = this._getTimer();
     let lineWidth = options.lineWidth || (this.cHeight - this.ballWidth) * 90 / 100;
 
     let defaultBallStyle = 'red'
@@ -42,13 +63,31 @@ class CanvasPendulum {
       spend: index === 0 ? this.initSpeed : 0,
       w: 0,
     }));
+
+    this._status = 'pause';
+
+    let mouse = utils.captureMouse(this.canvas);
+    this.canvas.addEventListener('click',(e)=>{
+      this.pendulums.some((item,index) => {
+        let isInBall = item.ball.isPointInBall(mouse.x,mouse.y)
+        if (isInBall) {
+          this.emit('ballClick',{
+            spend: item.spend,
+            index: index,
+            x: mouse.x,
+            y: mouse.y,
+          });
+        }
+        return isInBall
+      })
+    })
   }
 
-  getTimer(){
+  _getTimer(){
     return + new Date() - this.startTime;
   }
 
-  checkConflict (ball1,ball2){
+  _checkConflict (ball1,ball2){
     if (!ball1 || !ball2) {
       return false
     }
@@ -56,10 +95,25 @@ class CanvasPendulum {
   }
 
   start(){
-    window.requestAnimationFrame(this.start.bind(this), this.canvas);
+    if (this._status !== 'running') {
+      this._status = 'running';
+      this._run();
+    }
+    return this;
+  }
+
+  stop(){
+    this._status = 'pause';
+    return this;
+  }
+
+  _run(){
+    if (this._status === 'running') {
+      window.requestAnimationFrame(this._run.bind(this), this.canvas);
+    }
     this.context.clearRect(0, 0, this.canvas.width, this.canvas.height);
-    var elspsed = this.getTimer() - this.time;
-    this.time = this.getTimer();
+    var elspsed = this._getTimer() - this.time;
+    this.time = this._getTimer();
 
      // 绘制
     this.pendulums.forEach(item=>{
@@ -88,9 +142,11 @@ class CanvasPendulum {
 
     // 碰撞检测
     if (this.pendulums.length >= 2 && (
-      this.checkConflict(this.pendulums[0].ball,this.pendulums[1].ball) ||
-      this.checkConflict(this.pendulums[this.pendulums.length-1].ball,this.pendulums[this.pendulums.length -2].ball))) {
-      console.log('碰撞了！！！');
+      this._checkConflict(this.pendulums[0].ball,this.pendulums[1].ball) ||
+      this._checkConflict(this.pendulums[this.pendulums.length-1].ball,this.pendulums[this.pendulums.length -2].ball))) {
+      this.emit('ping',{
+        isFrist: this.pendulums[0].spend > 0
+      });
       var spend = this.pendulums[0].spend;
       var w = this.pendulums[0].w;
       this.pendulums[0].spend = this.pendulums[this.pendulums.length - 1].spend;
