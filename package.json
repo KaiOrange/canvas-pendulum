@@ -1,6 +1,6 @@
 {
   "name": "canvas-pendulum",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "canvas单摆组件",
   "main": "/lib/index.js",
   "directories": {
