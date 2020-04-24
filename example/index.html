@@ -1,21 +1,22 @@
-<!doctype html>
+<!DOCTYPE html>
 <html>
   <head>
-    <meta charset="utf-8">
+    <meta charset="utf-8" />
     <title>canvas-pendulum</title>
-    <style >
-      canvas{
-        border: 1px solid ;
+    <style>
+      canvas {
+        border: 1px solid;
       }
     </style>
   </head>
   <body>
-
     <canvas id="canvas" width="400" height="400"></canvas>
 
     <h3>开源地址：</h3>
     <div>
-      <a href="https://github.com/KaiOrange/canvas-pendulum">https://github.com/KaiOrange/canvas-pendulum</a>
+      <a href="https://github.com/KaiOrange/canvas-pendulum"
+        >https://github.com/KaiOrange/canvas-pendulum</a
+      >
     </div>
 
     <h3>执行代码：</h3>
@@ -38,17 +39,62 @@
 
     <table>
       <thead>
-        <tr><td>参数</td><td>描述</td><td>类型</td><td>默认值</td></tr>
+        <tr>
+          <td>参数</td>
+          <td>描述</td>
+          <td>类型</td>
+          <td>默认值</td>
+        </tr>
       </thead>
       <tbody>
-        <tr><td>el</td><td>DOM元素</td><td>string</td><td>null,(即追加到document.body上)</td></tr>
-        <tr><td>ballNum</td><td>小球个数</td><td>number</td><td>1</td></tr>
-        <tr><td>ballStyles</td><td>小球样式</td><td>string/attay</td><td>'red'</td></tr>
-        <tr><td>width</td><td>canvas宽度</td><td>number</td><td>300</td></tr>
-        <tr><td>height</td><td>canvas高度</td><td>number</td><td>150</td></tr>
-        <tr><td>T</td><td>小球周期（毫秒）</td><td>number</td><td>1000</td></tr>
-        <tr><td>maxAngle</td><td>单摆最大角度</td><td>number</td><td>20</td></tr>
-        <tr><td>lineWidth</td><td>线的长度</td><td>number</td><td>(canvas高度-小球直径)*90%</td></tr>
+        <tr>
+          <td>el</td>
+          <td>DOM元素</td>
+          <td>string</td>
+          <td>null,(即追加到document.body上)</td>
+        </tr>
+        <tr>
+          <td>ballNum</td>
+          <td>小球个数</td>
+          <td>number</td>
+          <td>1</td>
+        </tr>
+        <tr>
+          <td>ballStyles</td>
+          <td>小球样式</td>
+          <td>string/attay</td>
+          <td>'red'</td>
+        </tr>
+        <tr>
+          <td>width</td>
+          <td>canvas宽度</td>
+          <td>number</td>
+          <td>300</td>
+        </tr>
+        <tr>
+          <td>height</td>
+          <td>canvas高度</td>
+          <td>number</td>
+          <td>150</td>
+        </tr>
+        <tr>
+          <td>T</td>
+          <td>小球周期（毫秒）</td>
+          <td>number</td>
+          <td>1000</td>
+        </tr>
+        <tr>
+          <td>maxAngle</td>
+          <td>单摆最大角度</td>
+          <td>number</td>
+          <td>20</td>
+        </tr>
+        <tr>
+          <td>lineWidth</td>
+          <td>线的长度</td>
+          <td>number</td>
+          <td>(canvas高度-小球直径)*90%</td>
+        </tr>
       </tbody>
     </table>
     <script src="./example.js"></script>

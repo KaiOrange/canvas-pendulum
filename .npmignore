@@ -4,7 +4,8 @@ node_modules/
 .eslintcache
 .cache
 dist
-exampleDist
+docs
 .serverless
 .idea
 .vscode
+src

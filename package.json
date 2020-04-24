@@ -16,7 +16,5 @@
   ],
   "author": "Orange",
   "license": "ISC",
-  "devDependencies": {
-    "cssnano": "^4.1.10"
-  }
+  "devDependencies": {}
 }
