@@ -5,7 +5,7 @@ window.onload = function () {
     el: document.getElementById('canvas'),
     ballNum: 4,
     ballStyles: [
-      'https://www.kai666666.top/images/avatar.png',
+      'https://www.kai666666.com/images/avatar.png',
       '#00ff00',
       'orange',
       'transparent',
