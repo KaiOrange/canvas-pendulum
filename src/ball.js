@@ -6,9 +6,16 @@ class Ball {
     this.vx = options.vx
     this.vy = options.vy
     this.style = options.style || 'red'
-    if (this.isURL(this.style)) {
-      this.image = new Image()
-      this.image.src = this.style
+    this.isImageStyle = this.isURL(this.style)
+    if (this.isImageStyle) {
+      const image = new Image()
+      image.src = this.style
+      image.onload = () => {
+        this.image = image
+      }
+      image.error = () => {
+        console.error('[canvas-pendulum] load image error:' + this.style)
+      }
     }
     this.rotation = options.rotation || 0
     this.outLineWidth = options.outLineWidth || 1
@@ -30,17 +37,19 @@ class Ball {
     context.arc(0, 0, this.radius, 0, Math.PI * 2, true)
     context.closePath()
 
-    if (this.image) {
-      context.save()
-      context.clip()
-      context.drawImage(
-        this.image,
-        -this.radius + this.outLineWidth / 2,
-        -this.radius + this.outLineWidth / 2,
-        this.radius * 2 - this.outLineWidth,
-        this.radius * 2 - this.outLineWidth
-      )
-      context.restore()
+    if (this.isImageStyle) {
+      if (this.image) {
+        context.save()
+        context.clip()
+        context.drawImage(
+          this.image,
+          -this.radius + this.outLineWidth / 2,
+          -this.radius + this.outLineWidth / 2,
+          this.radius * 2 - this.outLineWidth,
+          this.radius * 2 - this.outLineWidth
+        )
+        context.restore()
+      }
     } else {
       context.fillStyle = this.style
       context.fill()

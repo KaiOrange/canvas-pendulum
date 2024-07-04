@@ -124,14 +124,14 @@ class CanvasPendulum extends EventEmitter {
       window.requestAnimationFrame(this._run.bind(this), this.canvas)
     }
     this.context.clearRect(0, 0, this.canvas.width, this.canvas.height)
-    var elspsed = this._getTimer() - this.time
+    const elspsed = this._getTimer() - this.time
     this.time = this._getTimer()
 
     // 绘制
     this.pendulums.forEach((item) => {
       // item.w+=item.spend;
       item.w += item.spend * elspsed
-      var angle = Math.sin(item.w) * this.maxRadian
+      const angle = Math.sin(item.w) * this.maxRadian
       item.ball.x =
         item.fixedPoint[0] - (item.line + item.radius) * Math.sin(angle)
       item.ball.y =
@@ -168,8 +168,8 @@ class CanvasPendulum extends EventEmitter {
       this.emit('ping', {
         isFrist: this.pendulums[0].spend > 0,
       })
-      var spend = this.pendulums[0].spend
-      var w = this.pendulums[0].w
+      const spend = this.pendulums[0].spend
+      const w = this.pendulums[0].w
       this.pendulums[0].spend = this.pendulums[this.pendulums.length - 1].spend
       this.pendulums[0].w = this.pendulums[this.pendulums.length - 1].w
       this.pendulums[this.pendulums.length - 1].spend = spend
